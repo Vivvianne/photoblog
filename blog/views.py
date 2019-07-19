@@ -1,14 +1,25 @@
 from django.shortcuts import render
-from django.http  import HttpResponse
 import datetime as dt
+
+posts = [
+    {
+        'author': 'VivNK',
+        'title': 'Blog post 1',
+        'content':'First blog',
+        'date_posted':'July 19,2019'
+    }
+]
+    
 
 # Create your views here.
 def welcome(request):
-    return HttpResponse('<h1>Welcome to the Photoblog</h1>')
+    context = {
+        'posts':posts
+    }
+    return render(request, 'blog/welcome.html', context)
 
 def about(request):
-    return HttpResponse('<h1>About Photoblog</h1>')
-
+     return render(request, 'blog/about.html',{'title':'About'})
 
 def blog_of_day(request):
     date = dt.date.today()
