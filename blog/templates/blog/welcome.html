@@ -1,17 +1,43 @@
-{% extends "blog/base.html" %}
+{% extends 'blog/base.html'%}
 
-{% block content %}
+{% block content %} 
+{{ block.super}}
 
-{% for post in posts%}
-<photo class="media content-section">
-    <div class="media-body">
-        <div class="photo-metadata">
-            <a class="mr-2" href="#">{{ post.author }}</a>
-            <small class="text-muted">{{ post.date_posted }}</small>
-        </div>
-        <h2><a class="photo-title" href="#">{{ post.title }}</a></h2>
-        <p class="article-content">{{ post.content }}</p>
+<div class="container">
+
+  <!-- Looping through blogs   -->
+  {% for blog_item in blog %}
+
+  <div class="row">
+    <!-- displaying News articles -->
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <h2 class="text-center"> {{ blog_item.image_name }} </h2>
     </div>
-</photo>
-{% endfor%}
-{% endblock content %}
+
+  </div>
+  
+  {% empty %}
+  <div class="row">
+    <h2 class="text-center">There No Blog Items</h2>
+  </div>
+  {% endfor %}
+  
+  {% for blog_item in blog %}
+
+  <div class="row">
+    <!-- displaying News articles -->
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <h2 class="text-center"> {{ blog_item.image_name}} </h2>
+    </div>
+
+    <!--Display news Article images  -->
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <img src="{{blog_item.mygalary_image.url}}" class="img-responsive" alt="Image">
+    </div>
+
+  </div>
+  {% endfor %}
+
+</div>
+
+{% endblock %}
