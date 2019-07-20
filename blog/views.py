@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.http  import HttpResponse,Http404
+from django.shortcuts import render, redirect
 import datetime as dt
+from .models import Image
 
 posts = [
     {
@@ -20,14 +22,23 @@ def welcome(request):
 
 def about(request):
      return render(request, 'blog/about.html',{'title':'About'})
-
-def blog_of_day(request):
+ 
+def blog_current(request):
     date = dt.date.today()
-    html = f'''
-        <html>
-            <body>
-                <h1> {date.day}-{date.month}-{date.year}</h1>
-            </body>
-        </html>
-            '''
-    return HttpResponse(html)
+    blog = Image.imagepost_current()
+    return render(request, 'blog/imagepost_current.html', {"date": date,"blog":blog})
+
+def past_image_blog(request, past_date):
+    try:
+        # Converts data from the string Url
+        date = dt.datetime.strptime(past_date, '%Y-%m-%d').date()
+    except ValueError:
+        # Raise 404 error when ValueError is thrown
+        raise Http404()
+        assert False
+
+    if date == dt.date.today():
+        return redirect(blog_current)
+
+    blog = Image.days_blog(date)
+    return render(request, 'blog/imagepost_past.html',{"date": date,"blog":blog})

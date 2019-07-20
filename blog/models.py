@@ -1,5 +1,7 @@
 from django.db import models
 import datetime as dt
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -26,6 +28,8 @@ class Image(models.Model):
    image_path = models.ImageField(upload_to = 'mygallery/')
    image_location = models.ForeignKey(Location, on_delete=models.CASCADE)
    image_category = models.ForeignKey(Category,on_delete=models.CASCADE)
+   date_posted = models.DateTimeField(default=timezone.now)
+#    author = models.ForeignKey(User, on_delete=models.CASCADE)
    
    def __str__(self):
        return self.image_name
