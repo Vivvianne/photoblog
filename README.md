@@ -52,4 +52,4 @@ Images not displaying
 
 ## Licence
 
-[MIT]
+[MIT] https://github.com/Vivvianne/photoblog/blob/master/LICENSE
