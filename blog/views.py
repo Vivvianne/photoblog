@@ -3,22 +3,22 @@ from django.shortcuts import render, redirect
 import datetime as dt
 from .models import Image
 
-posts = [
-    {
-        'author': 'VivNK',
-        'title': 'Blog post 1',
-        'content':'First blog',
-        'date_posted':'July 19,2019'
-    }
-]
+# posts = [
+#     {
+#         'author': 'VivNK',
+#         'title': 'Blog post 1',
+#         'content':'First blog',
+#         'date_posted':'July 19,2019'
+#     }
+# ]
     
 
 # Create your views here.
 def welcome(request):
-    context = {
-        'posts':posts
-    }
-    return render(request, 'blog/welcome.html', context)
+    # context = {
+    #     'posts':posts
+    # }
+    return render(request, 'blog/welcome.html', )
 
 def about(request):
      return render(request, 'blog/about.html',{'title':'About'})
@@ -47,7 +47,7 @@ def search_results(request):
     
     if 'image' in request.GET and request.GET["image"]:
         search_term = request.GET.get("image")
-        searched_articles = Image.search_by_title(search_term)
+        searched_images = Image.search_by_title(search_term)
         message = f"{search_term}"
 
         return render(request, 'blog/search.html',{"message":message,"images": searched_images})
@@ -55,3 +55,10 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'blog/search.html',{"message":message})
+    
+def image(request,image_id):
+    try:
+        image = Image.objects.get(id = image_id)
+    except DoesNotExist:
+        raise Http404()
+    return render(request,"blog/image.html", {"image":image})
