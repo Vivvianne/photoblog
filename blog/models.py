@@ -26,7 +26,7 @@ class Category(models.Model):
 class Image(models.Model):
    image_name = models.CharField(max_length=30)
    image_description = models.TextField()
-   image_path = models.ImageField(upload_to = 'mygallery/')
+   image_path = models.ImageField(upload_to = 'images/')
    image_location = models.ForeignKey(Location, on_delete=models.CASCADE)
    image_category = models.ForeignKey(Category,on_delete=models.CASCADE)
    date_posted = models.DateTimeField(default=timezone.now)
@@ -36,8 +36,8 @@ class Image(models.Model):
        return self.image_name
    
    @classmethod
-   def all_images(cls):
-        images = cls.objects.all()
+   def get_all_images(cls):
+        images = Image.objects.all()
         return images
 
    

@@ -6,17 +6,13 @@ from .models import Image
 
 # Create your views here.
 def welcome(request):
-    blog = Image.objects.all()
+    images = Image.get_all_images()
     date = dt.date.today()
-    return render(request, 'blog/welcome.html', )
+    return render(request, 'blog/welcome.html', {'images':images} )
 
 def about(request):
      return render(request, 'blog/about.html',{'title':'About'})
  
-# def blog_current(request):
-#     date = dt.date.today()
-#     blog = Image.get_image_by_id()
-#     return render(request, 'blog/blog-current.html', {"date": date,"blog":blog})
 
 
 def search_results(request):
