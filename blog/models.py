@@ -29,6 +29,7 @@ class Image(models.Model):
    image_path = models.ImageField(upload_to = 'images/')
    image_location = models.ForeignKey(Location, on_delete=models.CASCADE)
    image_category = models.ForeignKey(Category,on_delete=models.CASCADE)
+   mygalary_image = models.ImageField(upload_to = 'mygalary/')
    date_posted = models.DateTimeField(default=timezone.now)
 #    author = models.ForeignKey(User, on_delete=models.CASCADE)
    
