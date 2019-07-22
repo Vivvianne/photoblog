@@ -26,7 +26,7 @@ This web app is used to show pictures based on different location of shooting,ca
 
 ## Live site
 
-One can view the live site here
+One can view the live site here https://vivgallery.herokuapp.com/
 
 ## Technologies used
 
